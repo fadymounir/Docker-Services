@@ -1,0 +1,17 @@
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq_global
+    restart: always
+    ports:
+      - "${RABBITMQ_PORT}:5672"       # Messaging port
+      - "${RABBITMQ_MANAGEMENT_PORT}:15672"  # Web UI port
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+    networks:
+      - global_network
+
+networks:
+  global_network:
+    external: true

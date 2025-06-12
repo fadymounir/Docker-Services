@@ -57,6 +57,16 @@ CACHE_DRIVER=redis
 SESSION_DRIVER=redis
 
 
+🔸RABBITMQ
+QUEUE_CONNECTION=rabbitmq
+RABBITMQ_HOST=rabbitmq_global
+RABBITMQ_PORT=5672
+RABBITMQ_USER=admin
+RABBITMQ_PASSWORD=adminpass
+RABBITMQ_VHOST=/
+
+
+
 🧭 3. Access GUI Tools
 🔹 phpMyAdmin
 URL: http://localhost:8080
@@ -75,3 +85,9 @@ Host: localhost
 Port: 6379
 Password: secretpass
 
+
+🌐 RabbitMQ Web UI
+Once running, access the RabbitMQ Management Dashboard at:
+🔗 http://localhost:15672
+Username: admin
+Password: adminpass
