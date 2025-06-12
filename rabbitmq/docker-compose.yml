@@ -4,14 +4,15 @@ services:
     container_name: rabbitmq_global
     restart: always
     ports:
-      - "${RABBITMQ_PORT}:5672"       # Messaging port
-      - "${RABBITMQ_MANAGEMENT_PORT}:15672"  # Web UI port
+      - "${RABBITMQ_PORT}:5672"
+      - "${RABBITMQ_MANAGEMENT_PORT}:15672"
     environment:
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     networks:
       - global_network
-
-networks:
-  global_network:
-    external: true
