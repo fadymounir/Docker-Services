@@ -1,0 +1,21 @@
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: mongodb_global
+    restart: always
+    ports:
+      - "${MONGO_PORT}:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - global_network
+
+volumes:
+  mongo_data:
+
+networks:
+  global_network:
+    external: true

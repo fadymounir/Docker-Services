@@ -1,0 +1,77 @@
+# 🐳 Global Docker Services for Development Purpose 
+
+This setup provides globally accessible Docker containers for use across multiple projects:
+
+- ✅ MySQL (with phpMyAdmin)
+- ✅ MongoDB
+- ✅ Redis
+
+All services run inside their own folders and are connected via a shared Docker network: `global_network`.
+
+---
+
+## ⚙️ 1. Setup Instructions
+
+### 🔌 Create the Shared Network (only once)
+
+```bash
+docker network create global_network
+
+🚀 Start Any Service
+Each service lives in a separate folder. To start any of them:
+
+cd ~/Docker-Services/<service-name>
+docker compose --env-file .env up -d
+
+Replace <service-name> with one of: mysql, mongodb, redis, phpmyadmin.
+
+
+📄 2. Laravel .env Configuration
+
+🔸 MySQL
+DB_CONNECTION=mysql
+DB_HOST=mysql_global
+DB_PORT=3306
+DB_DATABASE=your_database
+DB_USERNAME=root
+DB_PASSWORD=pass
+
+
+🔸 MongoDB
+DB_CONNECTION=mongodb
+DB_HOST=mongodb_global
+DB_PORT=27017
+DB_DATABASE=your_database
+DB_USERNAME=admin
+DB_PASSWORD=adminpass
+
+
+🔸 Redis
+REDIS_HOST=redis_global
+REDIS_PORT=6379
+REDIS_PASSWORD=secretpass
+
+# Optional
+QUEUE_CONNECTION=redis
+CACHE_DRIVER=redis
+SESSION_DRIVER=redis
+
+
+🧭 3. Access GUI Tools
+🔹 phpMyAdmin
+URL: http://localhost:8080
+Host: mysql_global
+Username: root
+Password: pass
+
+
+
+🔹 MongoDB Compass
+DSN: mongodb://admin:adminpass@localhost:27017
+
+
+🔹 RedisInsight
+Host: localhost
+Port: 6379
+Password: secretpass
+

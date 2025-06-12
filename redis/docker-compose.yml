@@ -1,0 +1,19 @@
+services:
+  redis:
+    image: redis:7.2
+    container_name: redis_global
+    restart: always
+    ports:
+      - "${REDIS_PORT}:6379"
+    command: ["redis-server", "--requirepass", "${REDIS_PASSWORD}"]
+    volumes:
+      - redis_data:/data
+    networks:
+      - global_network
+
+volumes:
+  redis_data:
+
+networks:
+  global_network:
+    external: true
