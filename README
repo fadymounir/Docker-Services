@@ -26,7 +26,7 @@ docker compose --env-file .env up -d
 Replace <service-name> with one of: mysql, mongodb, redis, phpmyadmin.
 
 
-📄 2. Laravel .env Configuration
+📄 2.env Configuration
 
 🔸 MySQL
 DB_CONNECTION=mysql
