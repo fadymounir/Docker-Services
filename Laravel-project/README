@@ -1,0 +1,4 @@
+Steps :-
+
+1)Copy nginx , docker-compose.yml DockerFile and paste in your root project 
+2) Run docker compose up -d --build 

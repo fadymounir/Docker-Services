@@ -1,0 +1,35 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: hours-center-app
+    container_name: hours-center-app
+    working_dir: /var/www
+    volumes:
+      - .:/var/www
+    networks:
+      - global_network
+    restart: unless-stopped
+    environment:
+      APP_PORT: ${APP_PORT}
+
+  web:
+    image: nginx:alpine
+    container_name: hours-center-web
+    ports:
+      - "${APP_PORT}:80"
+    volumes:
+      - .:/var/www
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - app
+    networks:
+      - global_network
+    restart: unless-stopped
+    environment:
+      APP_PORT: ${APP_PORT}
+
+networks:
+  global_network:
+    external: true
