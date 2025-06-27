@@ -20,3 +20,5 @@ networks:
   global_network:
     external: true
 
+
+
