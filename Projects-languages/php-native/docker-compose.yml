@@ -1,0 +1,14 @@
+services:
+  ismael-old:
+    build: .
+    container_name: ismael-old
+    ports:
+      - "9003:80"
+    volumes:
+      - .:/var/www/html
+    networks:
+      - global_network
+
+networks:
+  global_network:
+    external: true
