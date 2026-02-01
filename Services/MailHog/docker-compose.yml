@@ -1,0 +1,28 @@
+services:
+  mailhog:
+    image: mailhog/mailhog
+    container_name: mailhog
+    networks:
+      - global_network
+    ports:
+      - "1025:1025"  # SMTP (optional, for your app)
+
+  caddy:
+    image: caddy:latest
+    container_name: mailhog-caddy
+    networks:
+      - global_network
+    ports:
+      - "8025:80"    # Web UI with Basic Auth
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+    depends_on:
+      - mailhog
+
+networks:
+  global_network:
+    external: true
+
+
+#username mailhoguser
+## password is yourpassword
