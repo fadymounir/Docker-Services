@@ -1,0 +1,7 @@
+:80 {
+    basicauth {
+        mailhoguser $2a$14$qASywWCByMSZ2Y27PEoG5urfNwX2AnQY6Li7d.ONjmnfih2A/qDv2
+    }
+
+    reverse_proxy mailhog:8025
+}
