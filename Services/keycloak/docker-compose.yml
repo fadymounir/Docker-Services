@@ -1,0 +1,25 @@
+services:
+  keycloak:
+    image: jboss/keycloak:latest
+    container_name: keycloak
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+
+      KC_DB: mysql
+      KC_DB_URL_HOST: mysql_global         # must match your MySQL container name
+      KC_DB_URL_PORT: 3306
+      KC_DB_URL_DATABASE: keycloak  # must exist in MySQL
+      KC_DB_USERNAME: root
+      KC_DB_PASSWORD:
+
+    ports:
+      - "8080:8080"
+    command: ["start"]
+    networks:
+      - global_network
+    restart: always
+
+networks:
+  global_network:
+    external: true

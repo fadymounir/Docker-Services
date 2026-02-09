@@ -9,6 +9,8 @@ services:
       PMA_HOST: ${MYSQL_HOST}
       PMA_USER: ${MYSQL_USER}
       PMA_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - ./conf/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
     networks:
       - global_network
 
