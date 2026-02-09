@@ -1,0 +1,23 @@
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: keycloak
+    environment:
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+
+      KC_DB: ${KC_DB}
+      KC_DB_URL_HOST: ${KC_DB_URL_HOST}
+      KC_DB_URL_DATABASE: ${KC_DB_URL_DATABASE}
+      KC_DB_USERNAME: ${KC_DB_USERNAME}
+      KC_DB_PASSWORD: ${KC_DB_PASSWORD}
+    command: start-dev
+    ports:
+      - "${KEYCLOAK_HTTP_PORT}:8080"
+    networks:
+      - global_network
+    restart: always
+
+networks:
+  global_network:
+    external: true
