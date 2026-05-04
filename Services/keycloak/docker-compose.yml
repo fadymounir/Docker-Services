@@ -1,21 +1,27 @@
 services:
   keycloak:
-    image: jboss/keycloak:latest
+    image: quay.io/keycloak/keycloak:24.0
     container_name: keycloak
+    command: start-dev
     environment:
+      # Admin user
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_HOSTNAME_STRICT_HTTPS: "false"
+      KC_HTTP_ENABLED: "true"
+      KC_HOSTNAME_STRICT: "false"
+      KC_PROXY: edge   # add this if behind a reverse proxy
 
+      # MySQL connection
       KC_DB: mysql
-      KC_DB_URL_HOST: mysql_global         # must match your MySQL container name
+      KC_DB_URL_HOST: mysql_global
       KC_DB_URL_PORT: 3306
-      KC_DB_URL_DATABASE: keycloak  # must exist in MySQL
+      KC_DB_URL_DATABASE: keycloak
       KC_DB_USERNAME: root
-      KC_DB_PASSWORD:
+      KC_DB_PASSWORD: pass
 
     ports:
-      - "8080:8080"
-    command: ["start"]
+      - "8081:8080"
     networks:
       - global_network
     restart: always

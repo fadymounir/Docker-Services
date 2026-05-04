@@ -1,0 +1,15 @@
+services:
+  fake-gcs:
+    image: fsouza/fake-gcs-server:latest
+    container_name: fake-gcs
+    command: -scheme http -port 4443 -public-host fake-gcs:4443
+    ports:
+      - "4443:4443"
+    volumes:
+      - ./storage/gcs:/data
+    networks:
+      - global_network
+
+networks:
+  global_network:
+    external: true
