@@ -10,7 +10,31 @@ All services run inside their own folders and are connected via a shared Docker 
 
 ---
 
-## ⚙️ 1. Setup Instructions
+## 🚀 Quick start — `services.sh`
+
+One script installs and manages everything. From the repo root:
+
+```bash
+./services.sh                    # interactive picker: choose what to install
+./services.sh up all             # start every service
+./services.sh up mysql redis     # start specific ones
+./services.sh status             # what's running, with ports and URLs
+./services.sh down mysql         # stop a service (data volume is kept)
+./services.sh restart all
+./services.sh pull all           # refresh images
+./services.sh logs mysql         # follow logs
+./services.sh list               # available services
+./services.sh --help
+```
+
+It creates the shared `global_network` for you, loads each service's `.env`,
+and pulls in dependencies automatically — asking for `phpmyadmin` also starts
+`mysql`, `sentry-log` also starts `postgres` and `redis`. Service names are
+case-insensitive (`pgadmin` == `pgAdmin`).
+
+---
+
+## ⚙️ 1. Manual Setup (what the script does under the hood)
 
 ### 🔌 Create the Shared Network (only once)
 
